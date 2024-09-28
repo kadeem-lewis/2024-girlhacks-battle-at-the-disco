@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/eslint",
     "@nuxt/ui",
+    "nuxt-vuefire",
   ],
   postcss: {
     plugins: {
