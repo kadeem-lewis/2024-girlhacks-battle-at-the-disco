@@ -5,6 +5,11 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   ssr: false,
+  runtimeConfig: {
+    public: {
+      lastFMApiKey: process.env.LAST_FM_API_KEY,
+    },
+  },
   devtools: { enabled: true },
   modules: [
     "@nuxt/devtools",
