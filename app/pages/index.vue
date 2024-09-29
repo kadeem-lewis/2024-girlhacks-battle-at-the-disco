@@ -28,10 +28,15 @@
           divide: 'divide-y divide-gray-100 dark:divide-gray-800',
         }"
       >
-        <UFormGroup label="Username:">
-          <UInput v-model="username" placeholder="Enter a username..." />
-        </UFormGroup>
-        <UButton block @click="handleAnonymouslySignIn">Submit</UButton>
+        <template #header>
+          <h2 class="text-2xl font-bold uppercase">Enter Username</h2>
+        </template>
+        <div class="space-y-2">
+          <UFormGroup label="Username:">
+            <UInput v-model="username" placeholder="Enter a username..." />
+          </UFormGroup>
+          <UButton block @click="handleAnonymouslySignIn">Submit</UButton>
+        </div>
       </UCard>
     </UModal>
   </div>
