@@ -54,6 +54,12 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(consola@3.2.3)(firebase@10.13.2)(vue@3.5.10(typescript@5.6.2))
     devDependencies:
+      '@iconify-json/fa6-solid':
+        specifier: ^1.2.0
+        version: 1.2.0
+      '@iconify-json/logos':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@nuxt/eslint-config':
         specifier: ^0.5.7
         version: 0.5.7(eslint@9.11.1(jiti@2.0.0))(typescript@5.6.2)
@@ -972,8 +978,14 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
+  '@iconify-json/fa6-solid@1.2.0':
+    resolution: {integrity: sha512-hywmSkhPqay1lBtEltuGhawtUpq18Yyko8H2e3/artvTv5Eey1hz7OdBA2cXRwiES17KrkmXGoLDwNtkcpN4cw==}
+
   '@iconify-json/heroicons@1.2.0':
     resolution: {integrity: sha512-EmvGN0L9EUJCmQ82rkLGZ4tkz0YGQfZV7ugKT6UvHni/bxNitQrD0gLj6NJj2W9zsSoXyNHyCX236+EJmO4pmA==}
+
+  '@iconify-json/logos@1.2.0':
+    resolution: {integrity: sha512-VkU9QSqeZR2guWbecdqkcoZEAJfgJJTUm6QAsypuZQ7Cve6zy39wOXDjp2H31I8QyQy4O3Cz96+pNji6UQFg4w==}
 
   '@iconify/collections@1.0.465':
     resolution: {integrity: sha512-40sG1esFVHw4WdT9vH16FAu21KqZqudGHLCDs4uRAnLaym1XFXLJYzT1YEYlaV+mz3N7DQMBcjuJqQFPFFz42Q==}
@@ -5947,7 +5959,15 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
+  '@iconify-json/fa6-solid@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/heroicons@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/logos@1.2.0':
     dependencies:
       '@iconify/types': 2.0.0
 
