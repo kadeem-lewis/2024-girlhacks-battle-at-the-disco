@@ -1,5 +1,8 @@
 <template>
   <UCard>
+    <template #header>
+      <h2 class="text-lg font-semibold">Chat</h2>
+    </template>
     <div ref="messageContainer" class="max-h-64 grow overflow-y-auto">
       <GameChatBubble
         v-for="message in messages"
