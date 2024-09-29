@@ -29,6 +29,9 @@ importers:
       firebase:
         specifier: ^10.13.2
         version: 10.13.2
+      'mdi: ^1.2.0':
+        specifier: 'link:@iconify-json/mdi: ^1.2.0'
+        version: 'link:@iconify-json/mdi: ^1.2.0'
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
