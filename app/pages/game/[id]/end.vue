@@ -9,11 +9,13 @@
           <h3 class="text-2xl font-semibold">Results</h3>
         </div>
         <div class="space-y-2">
-          <div v-for="player of players" :key="player.id">
+          <div v-for="player of players" :key="player.id" class="space-y-2">
             <p>The winner is: {{ player.username }}</p>
-            <div class="flex justify-between">
-              <span>{{ player.artist.name }}</span>
-              <span>{{ player.score }}</span>
+            <div class="flex flex-col gap-2">
+              <span
+                >{{ player.artist.name }} - {{ player.chosenSong.name }}</span
+              >
+              <span>Score: {{ player.score }}</span>
             </div>
           </div>
         </div>
