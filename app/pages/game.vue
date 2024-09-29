@@ -1,6 +1,10 @@
 <template>
-  <div class="flex gap-2">
-    <NuxtPage />
+  <div class="flex justify-center gap-2">
+    <div class="space-y-2">
+      <GameTopBar />
+      <NuxtPage />
+      <GameSpectatorList />
+    </div>
     <GameChatBox />
   </div>
 </template>
