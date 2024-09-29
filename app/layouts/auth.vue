@@ -1,15 +1,18 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-between gap-y-4">
-    <NavBar />
+    <header class="w-full border-b py-2">
+      <UContainer>
+        <h1 class="text-2xl font-bold uppercase">App Name</h1>
+      </UContainer>
+    </header>
     <UContainer class="w-full grow">
       <main class="w-full">
         <NuxtPage />
       </main>
-      <UNotifications />
+      <footer class="text-center">
+        <p>&copy; 2024</p>
+      </footer>
     </UContainer>
-    <footer class="w-full border-t py-2 text-center">
-      <p>&copy; 2024</p>
-    </footer>
   </div>
 </template>
 
