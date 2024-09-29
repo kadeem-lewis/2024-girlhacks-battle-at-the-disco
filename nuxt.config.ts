@@ -6,6 +6,8 @@ export default defineNuxtConfig({
   },
   ssr: false,
   runtimeConfig: {
+    spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
+    spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     public: {
       lastFMApiKey: process.env.LAST_FM_API_KEY,
     },
