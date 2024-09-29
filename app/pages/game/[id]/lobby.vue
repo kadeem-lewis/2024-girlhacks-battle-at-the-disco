@@ -4,7 +4,7 @@
       <p class="text-lg font-bold">Settings</p>
       <UInputMenu v-model="selectedMode" :options="genres" />
     </div> -->
-    <div>
+    <div v-if="!isCountingDown">
       <p class="text-lg font-bold">Room Code:</p>
       <div class="py-2 text-2xl">
         <span class="bg-dark-mode-400 mr-2 rounded-lg p-2 font-bold">{{
@@ -20,6 +20,10 @@
           <UIcon v-else name="i-mdi-clipboard-check" class="text-2xl" />
         </button>
       </div>
+    </div>
+    <div v-else>
+      <p class="text-lg font-bold">Starting in:</p>
+      <p class="text-2xl">{{ countdown }}</p>
     </div>
     <template #footer>
       <UButton v-if="user?.uid === room?.host" block @click="startGame"
@@ -45,7 +49,22 @@ const roomCode = ref<string>(route.params.id);
 
 const { copied, copy, isSupported } = useClipboard();
 
+const countdown = ref<number>(0);
+const isCountingDown = ref(false);
+
 async function startGame() {
+  countdown.value = 5;
+  const interval = setInterval(() => {
+    isCountingDown.value = true;
+    countdown.value -= 1;
+    if (countdown.value === 0) {
+      clearInterval(interval);
+      updateGameState();
+    }
+  }, 1000);
+}
+
+async function updateGameState() {
   try {
     await updateDoc(doc(db, "rooms", route.params.id), {
       gameState: "playing",
@@ -56,7 +75,7 @@ async function startGame() {
 }
 
 watch(room, (newValue) => {
-  if (newValue.gameState === "playing") {
+  if (newValue && newValue.gameState === "playing") {
     navigateTo(`/game/${route.params.id}/play`);
   }
 });
