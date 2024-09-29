@@ -7,7 +7,7 @@
       </main>
       <UNotifications />
     </UContainer>
-    <footer class="w-full border-t py-2 text-center">
+    <footer class="w-full border-t bg-gray-800 py-2 text-center">
       <p>&copy; 2024</p>
     </footer>
   </div>

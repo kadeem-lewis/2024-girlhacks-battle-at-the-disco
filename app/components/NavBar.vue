@@ -1,8 +1,8 @@
 <template>
-  <header class="w-full border-b py-2">
+  <header class="w-full border-b bg-gray-800 py-2">
     <UContainer>
       <nav class="flex items-center justify-between">
-        <h1 class="text-2xl font-bold uppercase">App Name</h1>
+        <h1 class="text-2xl font-bold uppercase">BATTLE! AT THE DISCO</h1>
         <UButton
           v-if="user"
           variant="ghost"
