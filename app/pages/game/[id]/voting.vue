@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p class="text-2xl">{{ votingTimer }}</p>
     <UCard v-for="player in players" :key="player.id">
       <template #header>
         <h2 class="text-center font-bold uppercase">{{ player.username }}</h2>
