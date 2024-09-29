@@ -52,8 +52,25 @@ const { copied, copy, isSupported } = useClipboard();
 const countdown = ref<number>(0);
 const isCountingDown = ref(false);
 
+async function setArtists() {
+  const artist = await $fetch("/api/random_artist");
+  await updateDoc(
+    doc(db, "rooms", route.params.id, "players", user.value!.uid),
+    {
+      artist: artist,
+    },
+  );
+}
+
 async function startGame() {
+  await updateDoc(doc(db, "rooms", route.params.id), {
+    gameState: "countdown",
+  });
+}
+
+async function startCountdown() {
   countdown.value = 5;
+  await setArtists();
   const interval = setInterval(() => {
     isCountingDown.value = true;
     countdown.value -= 1;
@@ -75,6 +92,9 @@ async function updateGameState() {
 }
 
 watch(room, (newValue) => {
+  if (newValue && newValue.gameState === "countdown") {
+    startCountdown();
+  }
   if (newValue && newValue.gameState === "playing") {
     navigateTo(`/game/${route.params.id}/play`);
   }
