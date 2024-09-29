@@ -21,6 +21,7 @@ import {
   setDoc,
   Timestamp,
   updateDoc,
+  increment,
 } from "firebase/firestore";
 import { customAlphabet } from "nanoid";
 
@@ -39,6 +40,11 @@ async function handleCreateRoom() {
   const nanoid = customAlphabet(characters, 5);
   const roomId = nanoid();
   try {
+    await setDoc(doc(db, "rooms", roomId, "players", user.value!.uid), {
+      createdAt: Timestamp.now(),
+      isHost: true,
+      role: "player",
+    });
     await setDoc(doc(db, "rooms", roomId), {
       createdAt: Timestamp.now(),
       players: [user.value?.uid],
@@ -54,9 +60,26 @@ async function handleCreateRoom() {
 
 async function handleJoinRoom() {
   try {
-    await updateDoc(doc(db, "rooms", state.roomCode), {
-      players: arrayUnion(user.value?.uid),
+    const room = useDocument(doc(db, "rooms", state.roomCode));
+    if (!room.value) {
+      alert("Room does not exist");
+      return;
+    }
+    await setDoc(doc(db, "rooms", state.roomCode, "players", user.value!.uid), {
+      createdAt: Timestamp.now(),
+      role: room.value.players.length >= 2 ? "spectator" : "player",
+      isHost: false,
     });
+
+    const data = {};
+
+    if (room.value.playerCount >= 2) {
+      data.spectators = arrayUnion(user.value?.uid);
+    } else {
+      data.players = arrayUnion(user.value?.uid);
+    }
+
+    await updateDoc(doc(db, "rooms", state.roomCode), data);
     navigateTo({
       path: `/game/${state.roomCode}/lobby`,
     });
