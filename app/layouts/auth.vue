@@ -9,10 +9,10 @@
       <main class="w-full">
         <NuxtPage />
       </main>
-      <footer class="bg-gray-800 text-center">
-        <p>&copy; 2024</p>
-      </footer>
     </UContainer>
+    <footer class="w-full bg-gray-800 py-2 text-center">
+      <p>&copy; 2024</p>
+    </footer>
   </div>
 </template>
 
