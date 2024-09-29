@@ -5,7 +5,7 @@
       <slot />
     </main>
     <footer>
-      <p>&copy; 2021</p>
+      <p>&copy; 2024</p>
     </footer>
   </UContainer>
 </template>
