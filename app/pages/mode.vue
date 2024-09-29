@@ -21,7 +21,8 @@ import {
   setDoc,
   Timestamp,
   updateDoc,
-  increment,
+  addDoc,
+  collection,
 } from "firebase/firestore";
 import { customAlphabet } from "nanoid";
 
@@ -44,11 +45,21 @@ async function handleCreateRoom() {
       createdAt: Timestamp.now(),
       isHost: true,
       role: "player",
+      username: user.value?.displayName,
+      score: 0,
     });
     await setDoc(doc(db, "rooms", roomId), {
       createdAt: Timestamp.now(),
       players: [user.value?.uid],
       host: user.value?.uid,
+    });
+    await addDoc(collection(db, "rooms", roomId, "messages"), {
+      text: `${user.value?.displayName} has joined the room`,
+      createdAt: Timestamp.now(),
+      user: {
+        uid: "1",
+        displayName: "Announcer",
+      },
     });
     navigateTo({
       path: `/game/${roomId}/lobby`,
@@ -61,25 +72,31 @@ async function handleCreateRoom() {
 async function handleJoinRoom() {
   try {
     const room = useDocument(doc(db, "rooms", state.roomCode));
-    if (!room.value) {
-      alert("Room does not exist");
-      return;
-    }
     await setDoc(doc(db, "rooms", state.roomCode, "players", user.value!.uid), {
       createdAt: Timestamp.now(),
-      role: room.value.players.length >= 2 ? "spectator" : "player",
+      role: room.value?.players.length >= 2 ? "spectator" : "player",
       isHost: false,
+      username: user.value?.displayName,
+      score: 0,
     });
 
     const data = {};
 
-    if (room.value.playerCount >= 2) {
+    if (room.value?.playerCount >= 2) {
       data.spectators = arrayUnion(user.value?.uid);
     } else {
       data.players = arrayUnion(user.value?.uid);
     }
 
     await updateDoc(doc(db, "rooms", state.roomCode), data);
+    await addDoc(collection(db, "rooms", state.roomCode, "messages"), {
+      text: `${user.value?.displayName} has joined the room`,
+      createdAt: Timestamp.now(),
+      user: {
+        uid: "1",
+        displayName: "Announcer",
+      },
+    });
     navigateTo({
       path: `/game/${state.roomCode}/lobby`,
     });
