@@ -4,8 +4,22 @@
       <template #header>
         <h2 class="text-center font-bold uppercase">Login</h2>
       </template>
-      <UButton block @click="handleGoogleSignIn">Login with Google</UButton>
-      <UButton block @click="isOpen = true">Login Anonymously</UButton>
+      <div class="space-y-2">
+        <UButton
+          block
+          icon="i-logos-google-icon"
+          class="font-semibold"
+          @click="handleGoogleSignIn"
+          >Login with Google</UButton
+        >
+        <UButton
+          block
+          icon="i-fa6-solid-user-secret"
+          class="font-semibold"
+          @click="isOpen = true"
+          >Login Anonymously</UButton
+        >
+      </div>
     </UCard>
     <UModal v-model="isOpen">
       <UCard
@@ -26,24 +40,24 @@
 <script setup lang="ts">
 import {
   GoogleAuthProvider,
-  signInWithRedirect,
   signInAnonymously,
   updateProfile,
+  signInWithPopup,
 } from "firebase/auth";
 
-definePageMeta({});
+definePageMeta({
+  layout: "auth",
+});
 
 const auth = useFirebaseAuth()!;
-const googleAuthProvider = new GoogleAuthProvider();
 
 const isOpen = ref(false);
 const username = ref("");
 
-console.log(useCurrentUser().value);
-
 async function handleGoogleSignIn() {
+  const googleAuthProvider = new GoogleAuthProvider();
   try {
-    await signInWithRedirect(auth, googleAuthProvider);
+    await signInWithPopup(auth, googleAuthProvider);
     navigateTo("/mode");
   } catch (error) {
     console.error(error);
